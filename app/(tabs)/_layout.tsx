@@ -1,17 +1,17 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Link, Tabs } from 'expo-router';
 import { Pressable, useColorScheme } from 'react-native';
 
-import Colors from '@/constants/Colors';
+import Colors from '../../constants/Colors';
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
+  name: React.ComponentProps<typeof MaterialCommunityIcons>['name'];
   color: string;
 }) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
+  return <MaterialCommunityIcons size={28} style={{ marginBottom: -3 }} {...props} />;
 }
 
 export default function TabLayout() {
@@ -25,14 +25,15 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          headerShown: false,
+          title: 'Search',
+          tabBarIcon: ({ color }) => <TabBarIcon name="magnify" color={color} />,
           headerRight: () => (
             <Link href="/modal" asChild>
               <Pressable>
                 {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
+                  <MaterialCommunityIcons
+                    name="menu"
                     size={25}
                     color={Colors[colorScheme ?? 'light'].text}
                     style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
@@ -44,10 +45,19 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="SavedScreen"
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          headerShown: false,
+          title: 'Saved',
+          tabBarIcon: ({ color }) => <TabBarIcon name="heart-outline" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="AccountScreen"
+        options={{
+          headerShown: false,
+          title: 'Account',
+          tabBarIcon: ({ color }) => <TabBarIcon name="account-circle-outline" color={color} />,
         }}
       />
     </Tabs>
