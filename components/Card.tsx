@@ -1,8 +1,9 @@
 import {  StyleSheet, ViewStyle } from 'react-native';
 import { View } from './Themed';
-import { Property } from '../types/property';
+import { Property } from '@/types/property';
 import { ImageCarousel } from './ImageCarousel';
 import { CardInfo } from './CardInfo';
+import { LISTMARGIN } from '@/constants/Sizes';
 
 export const Card = (
     {property, style}:
@@ -10,7 +11,7 @@ export const Card = (
 
     return(
         <>
-         <View key={property.id} style={style}>
+         <View key={property.id} style={[styles.container, style]}>
             <ImageCarousel images={property.images}/>           
             <CardInfo property={property}/>
           </View>
@@ -19,6 +20,10 @@ export const Card = (
 }
 
 const styles = StyleSheet.create({
+  container: {
+    marginHorizontal: LISTMARGIN,
+    borderRadius: 5,
+  },
     cardInfo:{ 
         paddingVertical: 10, 
         paddingHorizontal: 5, 

@@ -11,4 +11,6 @@ export type Property = {
     state: string;
     zip: number;
     tags: string[];
+    lat: number;
+    long: number;
 }
