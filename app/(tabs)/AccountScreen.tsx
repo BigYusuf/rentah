@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { Text, View } from '../../components/Themed';
-import { Screen } from '../../components/Screen';
+import { Text, View } from '@/components/Themed';
+import { Screen } from '@/components/Screen';
 
 export default function AccountScreen() {
   return (
