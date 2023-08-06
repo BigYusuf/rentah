@@ -1,4 +1,4 @@
-import { Platform, StyleSheet, useColorScheme } from 'react-native'
+import { Platform, StyleSheet, TouchableOpacity, useColorScheme } from 'react-native'
 import React, { useRef, useState } from 'react'
 import { View } from '@/components/Themed';
 import MapView from 'react-native-maps';
@@ -7,6 +7,7 @@ import { MapMaker } from './MapMaker';
 import Colors from '@/constants/Colors';
 import { useNavigation } from '@react-navigation/native';
 import { Card } from './Card';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export const Map = ({ properties }:{properties: Property[]}) => {
     const [activeIndex, setActiveIndex] = useState(-1)
@@ -14,6 +15,14 @@ export const Map = ({ properties }:{properties: Property[]}) => {
     const mapRef = useRef<MapView | null>(null);
     const navigation = useNavigation();
 
+    const unFocusProperty = () => {
+        setActiveIndex(-1);
+        navigation.setOptions({tabBarStyle: {display: "flex"}});
+    }
+
+    const handleMapPress = () => {
+        if(Platform.OS === "android") unFocusProperty()
+    }
     const handleMarkerPress = (index: number) => {
         if(Platform.OS === "ios"){
             setTimeout(()=>{
@@ -31,7 +40,7 @@ export const Map = ({ properties }:{properties: Property[]}) => {
 
   return (
     <View style={styles.container}>
-        <MapView style={styles.map} userInterfaceStyle='light' ref={mapRef}>
+        <MapView style={styles.map} userInterfaceStyle='light' ref={mapRef} onPress={handleMapPress} >
             {properties.map((i, index) => (
                 <MapMaker
                     key={index}
@@ -47,7 +56,18 @@ export const Map = ({ properties }:{properties: Property[]}) => {
                 />
             ))}
         </MapView>
-        {activeIndex > -1 && <Card  style={styles.card} property={properties[activeIndex]} />}
+        {activeIndex > -1 &&
+            <>
+                {
+                Platform.OS === 'ios' && 
+                    <TouchableOpacity onPress={unFocusProperty} style={[styles.exit, {backgroundColor:Colors[colorScheme ?? 'light'].white}]}>
+                        <MaterialCommunityIcons name='close'
+                         color={Colors[colorScheme ?? 'light'].tint} size={24} />
+                    </TouchableOpacity> 
+                }
+                <Card  style={styles.card} property={properties[activeIndex]} />
+            </> 
+        }
     </View>
   )
 }
@@ -61,6 +81,13 @@ const styles = StyleSheet.create({
         height: "100%", 
         width: "100%",
         position: "relative",
+    },
+    exit:{
+        padding: 10,
+        position: "absolute",
+        top: 170, 
+        left: 15,
+        borderRadius:30,
     },
     card:{
         position: "absolute",

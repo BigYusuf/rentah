@@ -4,9 +4,11 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { Row } from './Row'
 import { LISTMARGIN } from '@/constants/Sizes'
 import Colors from '@/constants/Colors'
+import { useNavigation } from '@react-navigation/native'
 
 const HeaderLogisticsButton = ({label, onPress, iconName, style}:{label: string, onPress:()=> void, iconName?: any, style?: any}) => {
   const colorScheme = useColorScheme();
+  
   return(
     <TouchableOpacity onPress={onPress}>
       <Row style={[styles.row, style]}>
@@ -26,7 +28,11 @@ export const HeaderLogistics = ({
   setMapShown: (bool: boolean) => void
 }) => {
   const colorScheme = useColorScheme();
+  const navigation = useNavigation();
+
   const handleMapPress = () => {
+    navigation.setOptions({tabBarStyle: {display: "flex"}});
+    
     if(mapShown) return setMapShown(false)
     setMapShown(true)
   }
