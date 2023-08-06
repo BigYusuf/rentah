@@ -4,9 +4,12 @@ import { HEADERHEIGHT, LISTMARGIN } from '@/constants/Sizes';
 import { Card } from '@/components/Card';
 import { useState } from 'react';
 import AnimatedListHeader from '@/components/AnimatedListHeader';
+import { View } from '@/components/Themed';
+import MapView from 'react-native-maps';
 
 export default function SearchScreen() {
   const [scrollAnimation] = useState(new Animated.Value(0))
+  const [mapShown, setMapShown] = useState<boolean>(false)
  
 
   const properties = [
@@ -169,27 +172,34 @@ export default function SearchScreen() {
 ];
   return (
     <Screen>
-      <AnimatedListHeader scrollAnimation={scrollAnimation}/>
-      <Animated.FlatList 
-        onScroll={Animated.event(
-          [{
-            nativeEvent: {
-              contentOffset: {
-                y: scrollAnimation,
-              }}
-          }],{useNativeDriver: true}
-        )}
-        contentContainerStyle={{paddingTop: HEADERHEIGHT - 20}}
-        bounces={false}
-        scrollEventThrottle={16}
-        data={properties}
-        keyExtractor={(item) => item.id.toString()}
-        showsVerticalScrollIndicator= {false}
-        style={styles.cards}
-        renderItem={({item}) =>(
-          <Card property={item} style={styles.card}/>
-        )}
-      />
+      <AnimatedListHeader mapShown={mapShown} setMapShown={setMapShown} scrollAnimation={scrollAnimation}/>
+      
+      {mapShown ?
+        <View style={{flex:1, overflow: "hidden"}}>
+          <MapView style={{height: "100%", width: "100%"}} />
+        </View>
+      :
+        <Animated.FlatList 
+          onScroll={Animated.event(
+            [{
+              nativeEvent: {
+                contentOffset: {
+                  y: scrollAnimation,
+                }}
+            }],{useNativeDriver: true}
+          )}
+          contentContainerStyle={{paddingTop: HEADERHEIGHT - 20}}
+          bounces={false}
+          scrollEventThrottle={16}
+          data={properties}
+          keyExtractor={(item) => item.id.toString()}
+          showsVerticalScrollIndicator= {false}
+          style={styles.cards}
+          renderItem={({item}) =>(
+            <Card property={item} style={styles.card}/>
+          )}
+        />
+      }
     </Screen>
   );
 };

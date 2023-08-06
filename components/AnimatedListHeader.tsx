@@ -1,16 +1,24 @@
-import { FlatList, LayoutChangeEvent, Platform, StyleSheet, TouchableOpacity, useColorScheme } from 'react-native'
+import { LayoutChangeEvent, StyleSheet, useColorScheme } from 'react-native'
 import React, { useState } from 'react'
 import { Animated } from 'react-native'
 import { HEADERHEIGHT, LISTMARGIN } from '@/constants/Sizes'
-import { Text, View } from './Themed'
-import { Row } from './Row'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { View } from './Themed'
 import Colors from '@/constants/Colors'
 import { HeaderInput } from './HeaderInput'
 import HeaderFilterButtons from './HeaderFilterButtons'
 import { HeaderLogistics } from './HeaderLogistics'
 ``
-const AnimatedListHeader = ({scrollAnimation}:{scrollAnimation:Animated.Value}) => {
+const AnimatedListHeader = (
+    {
+        scrollAnimation,
+        mapShown,
+        setMapShown
+    }:
+    {
+        scrollAnimation: Animated.Value,
+        mapShown: boolean,
+        setMapShown: (bool: boolean) => void
+    }) => {
     const colorScheme = useColorScheme();
     const [offsetAnimation] = useState(new Animated.Value(0))
     const [clampedScroll, setClampedScroll] = useState(
@@ -56,7 +64,7 @@ const AnimatedListHeader = ({scrollAnimation}:{scrollAnimation:Animated.Value}) 
             <HeaderInput />
             <HeaderFilterButtons/>
         </View>
-        <HeaderLogistics />
+        <HeaderLogistics mapShown={mapShown} setMapShown={setMapShown} />
     </Animated.View>
     
   )
