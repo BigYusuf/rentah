@@ -1,9 +1,9 @@
 import {  StyleSheet, ViewStyle } from 'react-native';
 import { View } from './Themed';
-import { Property } from '@/types/property';
+import { Property } from '../types/property';
 import { ImageCarousel } from './ImageCarousel';
 import { CardInfo } from './CardInfo';
-import { LISTMARGIN } from '@/constants/Sizes';
+import { LISTMARGIN } from '../constants/Sizes';
 
 export const Card = (
     {property, style}:

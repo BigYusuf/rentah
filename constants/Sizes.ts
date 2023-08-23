@@ -11,3 +11,13 @@ let andriodNotch = 0;
 let andriodHeight = baseHeight + andriodNotch;
 
 export const HEADERHEIGHT = Platform.OS ==="ios" ? iosHeight : andriodHeight;
+
+
+const serverUrl = "http://192.168.43.241:5000/api"
+const location = "/location"
+const locationEndpoint = serverUrl + location
+
+export const endpoints = {
+  autoCompleteEndpoint: locationEndpoint + "/autocomplete",
+  searchEndpoint: locationEndpoint + "/search,"
+}

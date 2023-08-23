@@ -1,18 +1,24 @@
 import { Platform, StyleSheet, TouchableOpacity, useColorScheme } from 'react-native'
-import React, { useRef, useState } from 'react'
-import { View } from '@/components/Themed';
-import MapView from 'react-native-maps';
-import { Property } from '@/types/property';
+import React, { useState } from 'react'
+import { View } from './Themed';
+import MapView, { Region } from 'react-native-maps';
+import { Property } from '../types/property';
 import { MapMaker } from './MapMaker';
-import Colors from '@/constants/Colors';
+import Colors from '../constants/Colors';
 import { useNavigation } from '@react-navigation/native';
 import { Card } from './Card';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-export const Map = ({ properties }:{properties: Property[]}) => {
+export const Map = ({
+     properties,
+     mapRef,
+     initialRegion
+ }:{properties: Property[],
+     mapRef: React.MutableRefObject<MapView | null>
+     initialRegion?: Region | undefined
+    }) => {
     const [activeIndex, setActiveIndex] = useState(-1)
     const colorScheme = useColorScheme();
-    const mapRef = useRef<MapView | null>(null);
     const navigation = useNavigation();
 
     const unFocusProperty = () => {
@@ -40,7 +46,12 @@ export const Map = ({ properties }:{properties: Property[]}) => {
 
   return (
     <View style={styles.container}>
-        <MapView style={styles.map} userInterfaceStyle='light' ref={mapRef} onPress={handleMapPress} >
+        <MapView style={styles.map} 
+            userInterfaceStyle='light' 
+            ref={mapRef} 
+            onPress={handleMapPress}
+            initialRegion={initialRegion? initialRegion : undefined}
+            >
             {properties.map((i, index) => (
                 <MapMaker
                     key={index}
@@ -60,7 +71,7 @@ export const Map = ({ properties }:{properties: Property[]}) => {
             <>
                 {
                 Platform.OS === 'ios' && 
-                    <TouchableOpacity onPress={unFocusProperty} style={[styles.exit, {backgroundColor:Colors[colorScheme ?? 'light'].white}]}>
+                    <TouchableOpacity onPress={unFocusProperty} style={[styles.exit, {backgroundColor:Colors[colorScheme ?? 'light'].background}]}>
                         <MaterialCommunityIcons name='close'
                          color={Colors[colorScheme ?? 'light'].tint} size={24} />
                     </TouchableOpacity> 

@@ -2,7 +2,7 @@ import { FlatList, StyleSheet, Text, TouchableOpacity, useColorScheme } from 're
 import React from 'react'
 import {  } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import Colors from '@/constants/Colors'
+import Colors from '../constants/Colors'
 
 const HeaderFilterButtons = () => {
     const colorScheme = useColorScheme();

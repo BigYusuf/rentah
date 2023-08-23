@@ -4,6 +4,7 @@ import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
 import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
+import { QueryClient, QueryClientProvider } from 'react-query';
 //import * as eva from '@eva-design/eva';
 //import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
 //import {default as theme} from '../theme.json';
@@ -48,15 +49,19 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
+  const queryClient = new QueryClient();
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      {/*<ApplicationProvider {...eva} theme={theme}>*/}
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
-      {/*</ApplicationProvider>*/}
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        {/*<ApplicationProvider {...eva} theme={theme}>*/}
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+          <Stack.Screen name="FindLocationScreen" options={{ headerShown: false, presentation: 'modal' }} />
+        </Stack>
+        {/*</ApplicationProvider>*/}
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }

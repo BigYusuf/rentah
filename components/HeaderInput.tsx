@@ -1,17 +1,22 @@
 import { Platform, StyleSheet, TouchableOpacity, useColorScheme } from 'react-native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
+
 import { Text } from './Themed'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { Row } from './Row'
-import Colors from '@/constants/Colors'
+import Colors from '../constants/Colors'
 
-export const HeaderInput = () => {
+
+export const HeaderInput = ({ location }:{ location: string }) => {
     const colorScheme = useColorScheme();
+    const navigation = useNavigation();
+    
   return (
-    <TouchableOpacity style={styles.container} onPress={() => console.log("navigate to input screen")}>
+    <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('FindLocationScreen')}>
         <Row style={{alignItems: "center"}}>
             <MaterialCommunityIcons name='magnify' color={Colors[colorScheme ?? 'light'].tint} size={28} />
-            <Text style={styles.text}>Find a Location</Text>
+            <Text style={styles.text}>{location}</Text>
         </Row>
     </TouchableOpacity>
   )

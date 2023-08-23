@@ -2,8 +2,8 @@ import { StyleSheet, TouchableOpacity , useColorScheme } from 'react-native';
 import { Text, View } from './Themed';
 import React from 'react'
 import { Row } from './Row'
-import Colors from '@/constants/Colors';
-import { Property } from '@/types/property';
+import Colors from '../constants/Colors';
+import { Property } from '../types/property';
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 export const CardInfo = (

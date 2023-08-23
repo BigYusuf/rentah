@@ -2,8 +2,8 @@ import { StyleSheet, Text, TouchableOpacity, useColorScheme } from 'react-native
 import React from 'react'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { Row } from './Row'
-import { LISTMARGIN } from '@/constants/Sizes'
-import Colors from '@/constants/Colors'
+import { LISTMARGIN } from '../constants/Sizes'
+import Colors from '../constants/Colors'
 import { useNavigation } from '@react-navigation/native'
 
 const HeaderLogisticsButton = ({label, onPress, iconName, style}:{label: string, onPress:()=> void, iconName?: any, style?: any}) => {
@@ -21,11 +21,13 @@ const HeaderLogisticsButton = ({label, onPress, iconName, style}:{label: string,
 
 export const HeaderLogistics = ({
   mapShown,
-  setMapShown
+  setMapShown,
+  availableProperties,
 }:
 {
-  mapShown: boolean,
-  setMapShown: (bool: boolean) => void
+  mapShown: boolean;
+  setMapShown: (bool: boolean) => void;
+  availableProperties: number;
 }) => {
   const colorScheme = useColorScheme();
   const navigation = useNavigation();
@@ -41,7 +43,9 @@ export const HeaderLogistics = ({
     <Row style={styles.container}>
     <Row style={styles.row}>
         <MaterialCommunityIcons name="map-marker" size={18} color={Colors[colorScheme ?? 'light'].tint} />
-        <Text style={[styles.buttonText,{ color: Colors[colorScheme ?? 'light'].gray}]}>12,345 Avaliable</Text>
+        <Text style={[styles.buttonText,{ color: Colors[colorScheme ?? 'light'].gray}]}>
+          {availableProperties ? `${availableProperties} Spaces Available` : `Search Spaces`}
+        </Text>
         <HeaderLogisticsButton 
           onPress={() => console.log("save")}
           label={"Save"}

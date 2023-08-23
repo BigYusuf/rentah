@@ -1,9 +1,9 @@
 import { Image, FlatList, Pressable, useColorScheme, StyleSheet } from 'react-native'
 import React from 'react'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import Colors from '@/constants/Colors';
+import Colors from '../constants/Colors';
 import { useRef, useState } from 'react';
-import { LISTMARGIN, WIDTH } from '@/constants/Sizes';
+import { LISTMARGIN, WIDTH } from '../constants/Sizes';
 
 export const ImageCarousel = ({images}: {images: string[] }) => {
     const colorScheme = useColorScheme();
