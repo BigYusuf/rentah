@@ -1,25 +1,29 @@
-import { Animated, StyleSheet } from 'react-native';
+import { Animated, StyleSheet, useColorScheme } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
 import { useRoute } from '@react-navigation/native';
 import MapView from 'react-native-maps';
+import LottieView from 'lottie-react-native';
 
 import { HEADERHEIGHT } from '../../constants/Sizes';
+import Colors from '../../constants/Colors';
 import { Card } from '../../components/Card';
 import {Screen} from '../../components/Screen';
 import AnimatedListHeader from '../../components/AnimatedListHeader';
 import { Map } from '../../components/Map';
 import { getPropertiesInArea } from '../../assets/data/properties';
 import { Property } from '../../types/property';
-import { Text } from '../../components/Themed';
+import { Text, View } from '../../components/Themed';
+
 
 export default function SearchScreen() {
   const [scrollAnimation] = useState(new Animated.Value(0))
   const [mapShown, setMapShown] = useState<boolean>(false)
   const [properties, setProperties] = useState<Property[]>([])
   const [location, setLocation] = useState<string | undefined>(undefined)
+  const colorScheme = useColorScheme();
  
   const route = useRoute();
- 
+  //console.log(route)
   const mapRef = useRef<MapView | null>(null);
   
   
@@ -92,7 +96,32 @@ export default function SearchScreen() {
             )}
           />
           :
-          <Text style={{marginTop: 300}}>Tester</Text>
+          <>
+          {route.params?
+            <View style={[styles.lottieContainer, {backgroundColor: Colors[colorScheme ?? 'light'].background}]}>
+              
+              <Text style={[styles.searchText, {color: Colors[colorScheme ?? 'light'].tint} ]} >
+                No Properties Found
+              </Text>
+              <Text style={[styles.searchHint, {color: Colors[colorScheme ?? 'light'].gray} ]} >
+                Please Search a different location
+              </Text>
+            </View>
+            :
+            <View style={[styles.lottieContainer, {backgroundColor: Colors[colorScheme ?? 'light'].background}]}>
+              <LottieView 
+                autoPlay
+                loop
+                style={styles.lottie}
+                source={require("../../assets/lottiesAnimation/animation1.json")}
+              />
+              <Text style={[styles.searchText, {color: Colors[colorScheme ?? 'light'].tint} ]} >Begin Your Search</Text>
+              <Text style={[styles.searchHint, {color: Colors[colorScheme ?? 'light'].gray} ]} >
+                Find apartments anytime and anywhere
+              </Text>
+            </View>
+          }
+          </>
         }
         </>
       }
@@ -104,5 +133,22 @@ export default function SearchScreen() {
 const styles = StyleSheet.create({
   card: {
     marginVertical: 5,
+  },
+  lottieContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  lottie: {
+    height: 200,
+    width: 200,
+  },
+  searchText: {
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  searchHint: {
+    fontWeight: "400",
+    fontSize: 14,
   },
 });
