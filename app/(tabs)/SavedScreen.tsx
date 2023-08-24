@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity, useColorScheme } from 'react-native';
+import { FlatList, StyleSheet, TouchableOpacity, useColorScheme } from 'react-native';
 
 import { Text, View } from '../../components/Themed';
 import { Screen } from '../../components/Screen';
@@ -8,11 +8,15 @@ import { useState } from 'react';
 import LottieView from 'lottie-react-native';
 import AnimatedLottieView from 'lottie-react-native';
 import SignInAndSignUpBtn from '../../components/SignInAndSignUpBtn';
+import { properties } from '../../assets/data/properties';
+import { Card } from '../../components/Card';
+import { Property } from '../../types/property';
 
 export default function SavedScreen() {
   const [activeIndex, setActiveIndex] = useState<number>(0)
   const colorScheme = useColorScheme();
   const user = undefined // will removed this ehen integrated with backend
+  const likedProperties = properties // will removed this ehen integrated with backend
 
   const activeButton = (buttonIndex: number) => {
     if (activeIndex === buttonIndex) return Colors[colorScheme ?? 'light'].deepColorTint
@@ -34,9 +38,20 @@ export default function SavedScreen() {
       </View>
     )
   }
-
+  const getPropertiesFlatList = (properties: Property[]) => {
+    return(
+      <FlatList 
+        showsVerticalScrollIndicator={false}
+        data={properties}
+        style={{marginTop: 10}}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({item}) => <Card property={item} style={styles.card} />}  
+      />
+    )
+  }
   const getBody = () => {
-    if (activeIndex === 0) 
+    if (activeIndex === 0) {
+      if (likedProperties) return getPropertiesFlatList(likedProperties);
       return (
           <>
             <LottieView 
@@ -51,6 +66,7 @@ export default function SavedScreen() {
             {!user && <SignInAndSignUpBtn style={styles.signInAndSignUpContainer} />}
           </>
       );
+    }
       if (activeIndex === 1) 
         return (
             <>
@@ -147,5 +163,8 @@ const styles = StyleSheet.create({
   signInAndSignUpContainer: {
     marginTop: 15,
   },
-  
+  card:{
+    marginHorizontal: 0,
+    marginVertical: 5,
+  },
 });
