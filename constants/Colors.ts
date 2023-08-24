@@ -18,6 +18,8 @@ export default {
     tint: tintColorLight,
     tabIconDefault: '#ccc',
     tabIconSelected: activeColorLight,
+    mapColor: "light",
+    deepColorTint: myTheme["color-primary-600"]
   },
   dark: {
     lightblue: myTheme["color-info-300"],
@@ -29,5 +31,7 @@ export default {
     tint: tintColorDark,
     tabIconDefault: '#ccc',
     tabIconSelected: activeColorLight,
+    mapColor: "dark",
+    deepColorTint: myTheme["color-primary-600"]
   },
 };

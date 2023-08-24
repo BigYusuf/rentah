@@ -65,14 +65,17 @@ export default function SearchScreen() {
         mapShown={mapShown} 
         setMapShown={setMapShown} 
         scrollAnimation={scrollAnimation}
-        location={route.params? route.params.location: "Find a Location"}
+        location={location ? location: "Find a Location"}
         availableProperties ={properties ? properties.length : 0}
-      />
+        />
       
       {mapShown ?
        <Map 
         properties={properties} 
         mapRef={mapRef} 
+        location={location ? location: "Find a Location"}
+        setLocation={setLocation}
+        setProperties={setProperties}
         initialRegion={
           route.params?{
             latitude: Number(route.params.lat),
