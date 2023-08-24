@@ -14,6 +14,17 @@ import { getPropertiesInArea } from '../../assets/data/properties';
 import { Property } from '../../types/property';
 import { Text, View } from '../../components/Themed';
 
+type SearchScreenParams = {
+  key: string,
+  name: string,
+  path: string,
+  params:{
+    location: string;
+    boundingBox: string[];
+    lat: string;
+    lon: string;
+  }
+}
 
 export default function SearchScreen() {
   const [scrollAnimation] = useState(new Animated.Value(0))
@@ -22,7 +33,7 @@ export default function SearchScreen() {
   const [location, setLocation] = useState<string | undefined>(undefined)
   const colorScheme = useColorScheme();
  
-  const route = useRoute();
+  const route = useRoute<SearchScreenParams>();
   //console.log(route)
   const mapRef = useRef<MapView | null>(null);
   
