@@ -16,7 +16,9 @@ export default function SavedScreen() {
   const [activeIndex, setActiveIndex] = useState<number>(0)
   const colorScheme = useColorScheme();
   const user = undefined // will removed this ehen integrated with backend
-  const likedProperties = properties // will removed this ehen integrated with backend
+  const likedProperties = undefined // will removed this ehen integrated with backend
+  const contactedProperties = properties // will removed this ehen integrated with backend
+  const applicationProperties = undefined // will removed this ehen integrated with backend
 
   const activeButton = (buttonIndex: number) => {
     if (activeIndex === buttonIndex) return Colors[colorScheme ?? 'light'].deepColorTint
@@ -53,7 +55,7 @@ export default function SavedScreen() {
     if (activeIndex === 0) {
       if (likedProperties) return getPropertiesFlatList(likedProperties);
       return (
-          <>
+        <>
             <LottieView 
               autoPlay
               style={styles.lottie}
@@ -67,7 +69,9 @@ export default function SavedScreen() {
           </>
       );
     }
-      if (activeIndex === 1) 
+      if (activeIndex === 1) {
+        if (contactedProperties) return getPropertiesFlatList(contactedProperties);
+
         return (
             <>
               <AnimatedLottieView 
@@ -76,12 +80,15 @@ export default function SavedScreen() {
                 source={require("../../assets/lottiesAnimation/nodata.json")}
               />
               {getBodyText(
-                "Yo do not have any contact saved",
-                "Tap the plus icon on rentals to add contact",
+                "You have not contacted any properties yet",
+                "Your contacted proprties will show here",
               )}
               {!user && <SignInAndSignUpBtn style={styles.signInAndSignUpContainer} />}
             </>
         );
+      }
+      if(applicationProperties)
+      return getPropertiesFlatList(applicationProperties);
      return (
       <>
         <AnimatedLottieView 
@@ -90,8 +97,8 @@ export default function SavedScreen() {
           source={require("../../assets/lottiesAnimation/application.json")}
         />
         {getBodyText(
-          "Yo do not have any application",
-          "Tap the book icon on properties to add application",
+          "Check the status of your rental application here",
+          "Any properties that you have applied to will show up here",
         )}
         {!user && <SignInAndSignUpBtn style={styles.signInAndSignUpContainer} />}
       </>
