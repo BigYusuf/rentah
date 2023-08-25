@@ -28,7 +28,7 @@ export const ModalHeader = ({
                             color={Colors[colorScheme ?? 'light'].gray}/>
                         : null
                     }
-                    <Text>{text}</Text>
+                    <Text style={styles.text}>{text}</Text>
                 </Row>
             )
         }
@@ -63,5 +63,9 @@ const styles = StyleSheet.create({
         marginVertical: 30,
         height: 1,
         width: '80%',
+    },
+    text:{
+        fontSize: 24,
+        fontWeight: "bold",
     },
 });
