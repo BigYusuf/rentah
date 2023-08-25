@@ -60,6 +60,7 @@ function RootLayoutNav() {
           <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
           <Stack.Screen name="FindLocationScreen" options={{ headerShown: false, presentation: 'modal' }} />
           <Stack.Screen name="SignInScreen" options={{ headerShown: false, presentation: 'modal' }} />
+          <Stack.Screen name="ForgotPasswordScreen" options={{ headerShown: false, presentation: 'modal' }} />
         </Stack>
         {/*</ApplicationProvider>*/}
       </ThemeProvider>
