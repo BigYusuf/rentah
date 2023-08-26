@@ -25,7 +25,7 @@ export const ModalHeader = ({
                             name='close'
                             onPress={navigation.goBack} 
                             size={24}
-                            color={Colors[colorScheme ?? 'light'].gray}/>
+                            color={`#ccc`}/>
                         : null
                     }
                     <Text style={styles.text}>{text}</Text>

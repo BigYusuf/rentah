@@ -44,13 +44,13 @@ export default function InputField({
       if(inputType === "Password")
         return(
             <View style={styles.container}>
-                    <Text >{label}</Text>
+                <Text style={{ color:Colors[colorScheme ?? 'light'].text }}>{label}</Text>
                 <View style={styles.inputField}>
                     <TextInput
                         keyboardType={keyboardType}  
-                        style={[style, { borderWidth:1, borderRadius: 10, height: 50, paddingLeft: 10, borderColor:"#ccc", width: "100%"}]}
-                       // style={[style, {flex: 1, paddingVertical: 0}]}
                         placeholder={placeholder}
+                        placeholderTextColor={ Colors[colorScheme ?? 'light'].text }
+                        style={[style, styles.input, { color: Colors[colorScheme ?? 'light'].text, borderColor: Colors[colorScheme ?? 'light'].gray}]}
                         autoComplete='password'
                         autoCapitalize='none'
                         secureTextEntry={passwordHidden}
@@ -68,18 +68,38 @@ export default function InputField({
             {error && <Text style={styles.error}>{error}</Text>}
             </View>
         )
+      if (inputType=== "Email")
+        return (
+            <View style={styles.container}>
+                <Text style={{ color:Colors[colorScheme ?? 'light'].text }}>{label}</Text>
+                <View style={styles.inputField}>
+                    <TextInput
+                        placeholder={placeholder}
+                        placeholderTextColor={ Colors[colorScheme ?? 'light'].text }
+                        keyboardType={keyboardType}
+                        style={[style, styles.input, { color: Colors[colorScheme ?? 'light'].text, borderColor: Colors[colorScheme ?? 'light'].gray }]}
+                        value= {value}
+                        onBlur={onBlur}
+                        autoComplete={"email"}
+                        autoCapitalize="none"
+                        onChangeText ={onChangeText}
+                    />
+                </View>
+                {error && <Text style={styles.error}>{error}</Text>}
+            </View>
+        );
   return (
     <View style={styles.container}>
+        <Text style={{ color:Colors[colorScheme ?? 'light'].text }}>{label}</Text>
         <View style={styles.inputField}>
-            <Text>{label}</Text>
             <TextInput
                 placeholder={placeholder}
+                placeholderTextColor={ Colors[colorScheme ?? 'light'].text }
                 keyboardType={keyboardType}
-                //style={[style, {flex: 1, paddingVertical: 0, marginHorizontal:10}]}
-                style={[style, { borderWidth:1, borderRadius: 10, height: 50, paddingLeft: 10, borderColor:"#ccc", width: "100%"}]}
+                style={[style, styles.input, { color: Colors[colorScheme ?? 'light'].text, borderColor: Colors[colorScheme ?? 'light'].gray }]}
                 value= {value}
                 onBlur={onBlur}
-                autoComplete={"email"}
+                autoComplete='name'
                 autoCapitalize="none"
                 onChangeText ={onChangeText}
             />
@@ -102,6 +122,13 @@ const styles = StyleSheet.create({
     inputField:{
         position: "relative",
         paddingBottom: 8,
+    },
+    input:{
+        borderWidth: 1, 
+        borderRadius: 10, 
+        height: 50, 
+        paddingLeft: 10,
+        width: "100%",
     },
     error:{
         color: "red",
