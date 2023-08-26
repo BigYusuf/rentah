@@ -1,14 +1,14 @@
-import { StyleSheet, Platform, TextInput, useColorScheme, FlatList, ScrollView } from 'react-native';
-import { Text, View } from '../components/Themed';
-import { Screen } from '../components/Screen';
-import { ModalHeader } from '../components/ModalHeader';
+import { StyleSheet, Platform, TextInput, TouchableOpacity, useColorScheme, FlatList, ScrollView } from 'react-native';
 import { useState } from 'react';
 import { useQueryClient }  from 'react-query'
-import { Row } from '../components/Row';
-import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
+import { Text, View } from '../components/Themed';
+import { ModalHeader } from '../components/ModalHeader';
+import { Screen } from '../components/Screen';
+import { Row } from '../components/Row';
 import Colors from '../constants/Colors';
-import { Location } from '@/types/locationIQ';
+import { Location } from '../types/locationIQ';
 import { getSuggestedLocations } from '../services/location';
 import CurrentLocationBtn from '../components/CurrentLocationBtn';
 import { getFormattedLocationText } from '../utils/getFormattedLocationText';
@@ -148,8 +148,6 @@ const styles = StyleSheet.create({
   },
   button:{
     borderRadius: 10,
-    
-    //width:"20%",
   },
   buttonText:{
     width: "100%",
