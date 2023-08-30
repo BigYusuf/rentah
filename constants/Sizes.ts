@@ -15,9 +15,13 @@ export const HEADERHEIGHT = Platform.OS ==="ios" ? iosHeight : andriodHeight;
 
 const serverUrl = "http://192.168.43.241:5000/api"
 const location = "/location"
+const users = "/users"
+const userEndpoint = serverUrl + users
 const locationEndpoint = serverUrl + location
 
 export const endpoints = {
-  autoCompleteEndpoint: locationEndpoint + "/autocomplete",
-  searchEndpoint: locationEndpoint + "/search,"
+  autoComplete: locationEndpoint + "/autocomplete",
+  search: locationEndpoint + "/search",
+  login: userEndpoint + "/login",
+  register: userEndpoint + "/register",
 }

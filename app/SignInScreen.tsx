@@ -3,7 +3,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import React, { useState } from 'react'
 import * as yup from 'yup'
 import { Formik } from 'formik'
-import { Input } from '@ui-kitten/components';
+import { useMutation } from 'react-query'
 import { useNavigation } from '@react-navigation/native';
 
 import Colors from '../constants/Colors';
@@ -13,11 +13,27 @@ import { ModalHeader } from '../components/ModalHeader'
 import InputField from '../components/InputField'
 import OrDivider from '../components/OrDivider'
 import { AppleButton, FacebookButton, GoogleButton } from '../components/LogoButton'
+import { useAuth } from '../hooks/useAuth'
+import { loginUser } from '../services/user'
 
 const SignInScreen = () => {  
     const colorScheme = useColorScheme();
     const navigation = useNavigation();
     const [passwordHidden, setPasswordHidden] = useState<boolean>(true)
+    const {login} = useAuth();
+
+    const nativeLogin = useMutation(
+        async (values: { email: string; password: string })=> {
+            const user = await loginUser(values.email, values.password);
+           // console.log(user)
+            if(user){
+                login(user);
+                navigation.goBack();
+            }
+        } 
+    );
+
+    if(nativeLogin.isLoading) return <Text> Loading ...</Text>
 
     const handlePasswordVisibility = () =>{
         setPasswordHidden(!passwordHidden)
@@ -38,7 +54,7 @@ const SignInScreen = () => {
                     password: yup.string().required("Your password is required"),
                 })}
                 onSubmit={(values) => {
-                    console.log("login passing values to server", values)
+                    nativeLogin.mutate(values)
                 }}
             >
                 {({

@@ -2,12 +2,14 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useColorScheme } from 'react-native';
 import { QueryClient, QueryClientProvider } from 'react-query';
-//import * as eva from '@eva-design/eva';
-//import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
-//import {default as theme} from '../theme.json';
+import * as SecureStore from 'expo-secure-store';
+
+import { User } from '../types/user';
+import { AuthContext } from '../context/AuthContext';
+
 
 
 export {
@@ -50,22 +52,33 @@ export default function RootLayout() {
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
   const queryClient = new QueryClient();
+  const [user, setUser] = useState<User | null>(null)
+
+  useEffect(() => {
+    async function getUser() {
+      const user = await SecureStore.getItemAsync("user");
+      if(user) setUser(JSON.parse(user))
+    }
+  
+    getUser()
+  }, [])
+  
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        {/*<ApplicationProvider {...eva} theme={theme}>*/}
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-          <Stack.Screen name="FindLocationScreen" options={{ headerShown: false, presentation: 'modal' }} />
-          <Stack.Screen name="SignInScreen" options={{ headerShown: false, presentation: 'modal' }} />
-          <Stack.Screen name="ForgotPasswordScreen" options={{ headerShown: false, presentation: 'modal' }} />
-          <Stack.Screen name="SignUpScreen" options={{ headerShown: false, presentation: 'modal' }} />
-          <Stack.Screen name="ResetPasswordScreen" options={{ headerShown: false, presentation: 'modal' }} />
-        </Stack>
-        {/*</ApplicationProvider>*/}
-      </ThemeProvider>
-    </QueryClientProvider>
+    <AuthContext.Provider value= {{user, setUser}}>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+            <Stack.Screen name="FindLocationScreen" options={{ headerShown: false, presentation: 'modal' }} />
+            <Stack.Screen name="SignInScreen" options={{ headerShown: false, presentation: 'modal' }} />
+            <Stack.Screen name="ForgotPasswordScreen" options={{ headerShown: false, presentation: 'modal' }} />
+            <Stack.Screen name="SignUpScreen" options={{ headerShown: false, presentation: 'modal' }} />
+            <Stack.Screen name="ResetPasswordScreen" options={{ headerShown: false, presentation: 'modal' }} />
+          </Stack>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </AuthContext.Provider>
   );
 }

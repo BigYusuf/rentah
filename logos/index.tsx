@@ -1,24 +1,23 @@
 import * as React from "react"
-import Svg, { Path } from "react-native-svg"
+import Svg, { Circle, Path } from "react-native-svg"
 
 export const FacebookLogo = (props: any) => (
-<Svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={36}
-    height={36}
-    preserveAspectRatio="xMidYMid"
-    viewBox="0 0 256 256"
-    {...props}
-  >
-    <Path
-      fill="#395185"
-      d="M241.871 256.001c7.802 0 14.129-6.326 14.129-14.129V14.129C256 6.325 249.673 0 241.871 0H14.129C6.324 0 0 6.325 0 14.129v227.743c0 7.803 6.324 14.129 14.129 14.129h227.742"
-    />
-    <Path
-      fill="#FFF"
-      d="M176.635 256.001v-99.137h33.277l4.982-38.635h-38.259V93.561c0-11.186 3.107-18.809 19.148-18.809l20.459-.009V40.188c-3.54-.471-15.684-1.523-29.812-1.523-29.498 0-49.692 18.005-49.692 51.071v28.493h-33.362v38.635h33.362v99.137h39.897"
-    />
-  </Svg>
+  <Svg
+  xmlns="http://www.w3.org/2000/svg"
+  width={36}
+  height={36}
+  fill="none"
+  viewBox="0 0 48 48"
+  {...props}
+>
+  <Circle cx={24} cy={24} r={20} fill="#3B5998" />
+  <Path
+    fill="#fff"
+    fillRule="evenodd"
+    d="M29.315 16.958c-.623-.125-1.465-.218-1.995-.218-1.433 0-1.526.623-1.526 1.62v1.776h3.583l-.312 3.678h-3.271V35h-4.488V23.814H19v-3.678h2.306v-2.275c0-3.116 1.465-4.861 5.142-4.861 1.277 0 2.212.187 3.427.436l-.56 3.522Z"
+    clipRule="evenodd"
+  />
+</Svg>
 )
 
 export const GoogleLogo = (props: any) => (

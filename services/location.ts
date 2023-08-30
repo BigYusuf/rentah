@@ -7,7 +7,7 @@ export const getSuggestedLocations = async(text: string, limit?: number) => {
     try {
         let finalLimit = 8;
         if (limit) finalLimit = limit;
-        const url = `${endpoints.autoCompleteEndpoint}?location=${text}&limit=${finalLimit}`
+        const url = `${endpoints.autoComplete}?location=${text}&limit=${finalLimit}`
         const {data} = await axios.get<Location[]>(url)
         if (data) return data
         return [];
@@ -20,7 +20,7 @@ export const getSuggestedLocations = async(text: string, limit?: number) => {
 export const searchLocations = async(text: string) => {
     try {
         
-        const url = `${endpoints.searchEndpoint}?query=${text}&format=json`
+        const url = `${endpoints.search}?query=${text}&format=json`
         const {data} = await axios.get<Location[]>(url)
         if (data) return data
 
