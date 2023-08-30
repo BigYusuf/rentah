@@ -3,12 +3,13 @@ import { useNavigation } from '@react-navigation/native';
 
 import { Text, View } from '../../components/Themed';
 import { Screen } from '../../components/Screen';
+import { useAuth } from '../../hooks/useAuth';
 import SignInAndSignUpBtn from '../../components/SignInAndSignUpBtn';
 import ButtonList from '../../components/ButtonList';
 import Colors from '../../constants/Colors';
 
 export default function AccountScreen() {
-  const user = undefined
+  const {user, logout} = useAuth()
   const navigation = useNavigation();
   const colorScheme = useColorScheme();
 
@@ -43,9 +44,9 @@ export default function AccountScreen() {
           {user ?
             <>
               <Text style={styles.userName}>
-                Welcome, Yusuf
+                Welcome, {user.first_name? `${user.first_name}`: ""}
               </Text>
-              <Text style={styles.email}>bigYusufff@bighead.com</Text>
+              <Text style={styles.email}>{user.email}</Text>
             </>
             :
             <>
@@ -71,7 +72,7 @@ export default function AccountScreen() {
           <ButtonList  data={rentalManagementButtons} header={'Rental Manager Tools'} />
           <ButtonList  data={supportButtons} header={'Support'} />
           <View style={[styles.specialMarginVertical, {marginHorizontal: 10}]}>
-            <TouchableOpacity style={[styles.button, {borderColor: Colors[colorScheme ?? 'light'].deepColorTint}]} onPress={() => console.log("log user out")}>
+            <TouchableOpacity style={[styles.button, {borderColor: Colors[colorScheme ?? 'light'].deepColorTint}]} onPress={logout}>
               <Text style={[styles.buttonText, { color: Colors[colorScheme ?? 'light'].deepColorTint}]}>Sign Out</Text>
             </TouchableOpacity>
           </View>

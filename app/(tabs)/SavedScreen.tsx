@@ -11,11 +11,13 @@ import SignInAndSignUpBtn from '../../components/SignInAndSignUpBtn';
 import { properties } from '../../assets/data/properties';
 import { Card } from '../../components/Card';
 import { Property } from '../../types/property';
+import { useAuth } from '../../hooks/useAuth';
 
 export default function SavedScreen() {
   const [activeIndex, setActiveIndex] = useState<number>(0)
   const colorScheme = useColorScheme();
-  const user = undefined // will removed this ehen integrated with backend
+  
+  const {user} = useAuth()
   const likedProperties = undefined // will removed this ehen integrated with backend
   const contactedProperties = properties // will removed this ehen integrated with backend
   const applicationProperties = undefined // will removed this ehen integrated with backend
