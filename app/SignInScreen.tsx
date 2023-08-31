@@ -101,7 +101,7 @@ const SignInScreen = () => {
                                 <Text style={[styles.buttonText, { color: Colors[colorScheme ?? 'light'].white}]}>Sign In</Text>
                             </TouchableOpacity>
 
-                            <OrDivider style={styles.orContainer}/>
+                            <OrDivider or={true} style={styles.orContainer}/>
 
                             <GoogleButton 
                                 text='Continue with Google'

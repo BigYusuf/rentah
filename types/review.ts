@@ -1,8 +1,8 @@
 
 export type Review = {
     id: number; //change it string when connecting to db
-    user_id: string;
-    property_id: string;
+    user_id: number;//change to string when connected to backend
+    property_id: number;//change to string when connected to backend
     title: string;
     body: string;
     stars: number;

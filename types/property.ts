@@ -1,9 +1,12 @@
+import { Scores } from "./scores";
 import { Apartment } from "./apartment";
+import { Pets } from "./pets";
 import { Review } from "./review";
 
 export type Property = {
     id: number;
     images: any[];
+    unitType: string;
     rentLow: number;
     rentHigh: number;
     bedroomLow: number;
@@ -17,6 +20,7 @@ export type Property = {
     lat: number;
     long: number;
     about: string;
+    pets: Pets[];
     phoneNumber: string;
     website: string;
     dogsAllowed: boolean;

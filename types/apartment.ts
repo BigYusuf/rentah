@@ -1,10 +1,10 @@
 
 export type Apartment = {
     id: number; //change it string when connecting to db
-    bathroom: number;
-    bedroom: number;
+    bathrooms: number;
+    bedrooms: number;
     images: string[];
-    property_id: string;
+    property_id: number;//change to string later
     rent: number;
     sqFt: number;
     unit: string;

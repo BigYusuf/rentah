@@ -7,6 +7,8 @@ import { properties } from '../assets/data/properties';
 import { Text, View } from '../components/Themed';
 import { ImageCarousel } from '../components/ImageCarousel';
 import PropertyHeaderSection from '../components/propertyDetailsSection/PropertyHeaderSection';
+import OrDivider from '@/components/OrDivider';
+import PricingAndFloorPlanSection from '@/components/propertyDetailsSection/PricingAndFloorPlanSection';
 
 type PropertyDetailScreenParams = {
     key: string,
@@ -30,6 +32,8 @@ const PropertyDetailScreen = () => {
         {item.images ? < ImageCarousel imageStyle={styles.image} indexShown={true} images={item.images} /> : null}
         <View style={styles.contentContainer}>
           <PropertyHeaderSection property={item}/>
+          <OrDivider style={styles.divider}/>
+          <PricingAndFloorPlanSection property={item} />
         </View> 
        </>
        }
@@ -48,4 +52,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 0,
   },
   contentContainer:{},
+  divider:{
+    marginVertical: 15,
+  },
 })
