@@ -1,4 +1,5 @@
 import { FlatList, StyleSheet, TouchableOpacity, useColorScheme } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { Text, View } from '../../components/Themed';
 import { Screen } from '../../components/Screen';
@@ -16,9 +17,10 @@ import { useAuth } from '../../hooks/useAuth';
 export default function SavedScreen() {
   const [activeIndex, setActiveIndex] = useState<number>(0)
   const colorScheme = useColorScheme();
+  const navigation = useNavigation();
   
   const {user} = useAuth()
-  const likedProperties = undefined // will removed this ehen integrated with backend
+  const likedProperties = properties // will removed this ehen integrated with backend
   const contactedProperties = properties // will removed this ehen integrated with backend
   const applicationProperties = undefined // will removed this ehen integrated with backend
 
@@ -49,7 +51,13 @@ export default function SavedScreen() {
         data={properties}
         style={{marginTop: 10}}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={({item}) => <Card property={item} style={styles.card} />}  
+        renderItem={({item}) => 
+          <Card 
+          onPress={()=> navigation.navigate('PropertyDetailsScreen', {property_id: item.id})}
+          style={styles.card}
+          property={item}
+          />
+        }  
       />
     )
   }

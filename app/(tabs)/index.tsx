@@ -1,6 +1,6 @@
 import { Animated, StyleSheet, useColorScheme } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import MapView from 'react-native-maps';
 import LottieView from 'lottie-react-native';
 
@@ -32,6 +32,7 @@ export default function SearchScreen() {
   const [properties, setProperties] = useState<Property[]>([])
   const [location, setLocation] = useState<string | undefined>(undefined)
   const colorScheme = useColorScheme();
+  const navigation = useNavigation();
  
   const route = useRoute<SearchScreenParams>();
   //console.log(route)
@@ -106,7 +107,11 @@ export default function SearchScreen() {
             keyExtractor={(item) => item.id.toString()}
             showsVerticalScrollIndicator= {false}
             renderItem={({item}) =>(
-              <Card property={item} style={styles.card}/>
+              <Card 
+              onPress={()=> navigation.navigate('PropertyDetailsScreen', {property_id: item.id})}
+              style={styles.card}
+              property={item}
+              />
             )}
           />
           :

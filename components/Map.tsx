@@ -132,7 +132,15 @@ export const Map = ({
                          color={Colors[colorScheme ?? 'light'].tint} size={24} />
                     </TouchableOpacity> 
                 }
-                <Card  style={styles.card} property={properties[activeIndex]} />
+                <Card 
+                    onPress={()=> navigation.navigate(
+                        'PropertyDetailsScreen', {
+                            property_id: properties[activeIndex].id
+                        })
+                    }
+                    style={styles.card}
+                    property={properties[activeIndex]}
+                />
             </> 
         }
         {showSearchAreaBtn && activeIndex === -1 && 
