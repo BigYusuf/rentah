@@ -5,6 +5,7 @@ import { Row } from './Row'
 import Colors from '../constants/Colors';
 import { Property } from '../types/property';
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+import AllButtons from './AllButtons';
 
 export const CardInfo = (
     {property}:
@@ -23,12 +24,18 @@ export const CardInfo = (
         {property.tags.map((tag, index) => index === property.tags.length-1 ? tag : `${tag}, `)}
         </Text>
         <Row style={{ marginTop: 5}}>
-        <TouchableOpacity style={[styles.button, { borderWidth:1, borderColor: Colors[colorScheme ?? 'dark'].specialText }]} onPress={() => {}}>
-            <Text style={[styles.buttonText, { color: Colors[colorScheme ?? 'light'].specialText }]}>Email</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, { backgroundColor: Colors[colorScheme ?? 'dark'].tint }]} onPress={() => {}}>
-            <Text style={[styles.buttonText, { color: Colors[colorScheme ?? 'light'].white}]}>Call</Text>
-        </TouchableOpacity>
+       < AllButtons 
+            style={[styles.button, { borderWidth:1, borderColor: Colors[colorScheme ?? 'dark'].specialText }]} 
+            textStyle={[styles.buttonText, { color: Colors[colorScheme ?? 'light'].specialText }]}
+            title="Email"
+            onPress={()=> {}}
+       />
+       < AllButtons 
+            style={[styles.button, { backgroundColor: Colors[colorScheme ?? 'light'].tint }]} 
+            textStyle={[styles.buttonText, { color: Colors[colorScheme ?? 'light'].white }]}
+            title="Call"
+            onPress={()=> {}}
+       />
         </Row>
     </View>
   )

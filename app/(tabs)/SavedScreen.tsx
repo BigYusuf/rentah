@@ -13,6 +13,7 @@ import { properties } from '../../assets/data/properties';
 import { Card } from '../../components/Card';
 import { Property } from '../../types/property';
 import { useAuth } from '../../hooks/useAuth';
+import AllButtons from '../../components/AllButtons';
 
 export default function SavedScreen() {
   const [activeIndex, setActiveIndex] = useState<number>(0)
@@ -66,17 +67,17 @@ export default function SavedScreen() {
       if (likedProperties) return getPropertiesFlatList(likedProperties);
       return (
         <>
-            <LottieView 
-              autoPlay
-              style={styles.lottie}
-              source={require("../../assets/lottiesAnimation/favorite.json")}
-            />
-            {getBodyText(
-              "Yo do not have any favourite saved",
-              "Tap the heart icon on rentals to add favorites",
-            )}
-            {!user && <SignInAndSignUpBtn style={styles.signInAndSignUpContainer} />}
-          </>
+          <LottieView 
+            autoPlay
+            style={styles.lottie}
+            source={require("../../assets/lottiesAnimation/favorite.json")}
+          />
+          {getBodyText(
+            "Yo do not have any favourite saved",
+            "Tap the heart icon on rentals to add favorites",
+          )}
+          {!user && <SignInAndSignUpBtn style={styles.signInAndSignUpContainer} />}
+        </>
       );
     }
       if (activeIndex === 1) {
@@ -119,15 +120,24 @@ export default function SavedScreen() {
   return (
     <Screen style={styles.container}>
       <Row style={styles.buttonContainer}>
-        <TouchableOpacity onPress={() => handleActiveButton(0)} style={[styles.button, { backgroundColor: activeButton(0), borderColor: Colors[colorScheme ?? 'light'].deepColorTint, borderTopLeftRadius: 5, borderBottomLeftRadius: 5}]}>
-          <Text style={[styles.buttonText, { color: activeText(0)}]}>Favorites</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => handleActiveButton(1)} style={[styles.button, { backgroundColor: activeButton(1), borderColor: Colors[colorScheme ?? 'light'].deepColorTint, borderLeftWidth: 0, borderRightWidth: 0}]}>
-          <Text style={[styles.buttonText, { color: activeText(1)}]}>Contacted</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => handleActiveButton(2)} style={[styles.button, { backgroundColor: activeButton(2), borderColor: Colors[colorScheme ?? 'light'].deepColorTint, borderTopRightRadius: 5, borderBottomRightRadius: 5}]}>
-          <Text style={[styles.buttonText, { color: activeText(2)}]}>Applications</Text>
-        </TouchableOpacity>
+        <AllButtons 
+          onPress={() => handleActiveButton(0)}
+          textStyle={[styles.buttonText, { color: activeText(0)}]}
+          title='Favorites'
+          style={[styles.button, { backgroundColor: activeButton(0), borderColor: Colors[colorScheme ?? 'light'].deepColorTint, borderTopLeftRadius: 5, borderBottomLeftRadius: 5}]}
+        />
+        <AllButtons 
+          onPress={() => handleActiveButton(1)}
+          textStyle={[styles.buttonText, { color: activeText(1)}]}
+          title='Contacted'
+          style={[styles.button, { backgroundColor: activeButton(1), borderColor: Colors[colorScheme ?? 'light'].deepColorTint, borderTopLeftRadius: 5, borderBottomLeftRadius: 5}]}
+        />
+        <AllButtons 
+          onPress={() => handleActiveButton(2)}
+          textStyle={[styles.buttonText, { color: activeText(2)}]}
+          title='Applications'
+          style={[styles.button, { backgroundColor: activeButton(2), borderColor: Colors[colorScheme ?? 'light'].deepColorTint, borderTopLeftRadius: 5, borderBottomLeftRadius: 5}]}
+        />
       </Row>
       <View style={styles.body}>{getBody()}</View>
     </Screen>
