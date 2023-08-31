@@ -15,6 +15,7 @@ import OrDivider from '../components/OrDivider'
 import { AppleButton, FacebookButton, GoogleButton } from '../components/LogoButton'
 import { useAuth } from '../hooks/useAuth'
 import { loginUser } from '../services/user'
+import { Loading } from '../components/Loading'
 
 const SignInScreen = () => {  
     const colorScheme = useColorScheme();
@@ -33,7 +34,7 @@ const SignInScreen = () => {
         } 
     );
 
-    if(nativeLogin.isLoading) return <Text> Loading ...</Text>
+    if(nativeLogin.isLoading) return <Loading />
 
     const handlePasswordVisibility = () =>{
         setPasswordHidden(!passwordHidden)

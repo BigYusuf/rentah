@@ -3,7 +3,10 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import React, { useState } from 'react'
 import * as yup from 'yup'
 import { Formik } from 'formik'
+import { useMutation } from 'react-query'
 import { useNavigation } from '@react-navigation/native';
+import * as Facebook from 'expo-auth-session/providers/facebook';
+
 
 import Colors from '../constants/Colors';
 import { Text } from '../components/Themed'
@@ -12,15 +15,49 @@ import { ModalHeader } from '../components/ModalHeader'
 import InputField from '../components/InputField'
 import OrDivider from '../components/OrDivider'
 import { AppleButton, FacebookButton, GoogleButton } from '../components/LogoButton'
+import { useAuth } from '../hooks/useAuth'
+import { registerUser } from '../services/user'
+import { Loading } from '../components/Loading'
 
 const SignUpScreen = () => {  
     const colorScheme = useColorScheme();
     const navigation = useNavigation();
     const [passwordHidden, setPasswordHidden] = useState<boolean>(true)
+    const {login} = useAuth();
 
     const handlePasswordVisibility = () =>{
         setPasswordHidden(!passwordHidden)
     }
+
+    const [_, __, fbPromptAsync] = Facebook.useAuthRequest({
+        clientId: "1432198667560061",
+      //  redirectUri: "https://auth.expo.io/@bigyusufff/renta",
+       // scopes:['email']
+    })
+
+    const facebookRegister = useMutation(
+        async () => {
+            const response = await fbPromptAsync();
+            console.log("fb",response)
+            if(response.type === "success"){
+                const {access_token} = response.params;
+                console.log(response.params)
+            }
+        }
+    )
+
+    const nativeRegister = useMutation(
+        async (values: { first_name: string; last_name: string,  email: string; password: string })=> {
+            const user = await registerUser(values.first_name, values.last_name, values.email, values.password);
+           
+            if(user){
+                login(user);
+                navigation.goBack();
+            }
+        } 
+    );
+
+    if(nativeRegister.isLoading) return <Loading />
 
   return (
     <KeyboardAwareScrollView bounces={false} >
@@ -29,14 +66,14 @@ const SignUpScreen = () => {
             <Text style={styles.header}>Sign Up </Text>
             <Formik
                 initialValues={{
-                    firstName: "",
-                    lastName: "",
+                    first_name: "",
+                    last_name: "",
                     email: "",
                     password: "",
                 }}
                 validationSchema={yup.object().shape({
-                    firstName: yup.string().required("First name is required"),
-                    lastName: yup.string().required("Last name  is required"),
+                    first_name: yup.string().required("First name is required"),
+                    last_name: yup.string().required("Last name  is required"),
                     email: yup.string().email().required("Your email is required"),
                     password: yup
                       .string()
@@ -46,7 +83,7 @@ const SignUpScreen = () => {
                         "Your password must have 8 characters, 1 upperCase, 1 lowerCase letter, 1 Number and 1 special character"),
                 })}
                 onSubmit={(values) => {
-                    console.log("resgister new user", values)
+                    nativeRegister.mutate(values)
                 }}
             >
                 {({
@@ -63,25 +100,25 @@ const SignUpScreen = () => {
                                 label={"First Name"}
                                 inputType={"Name"}
                                 style={styles.input}
-                                value={values.firstName}
+                                value={values.first_name}
                                 icon={false}
-                                onChangeText={handleChange("firstName")}
+                                onChangeText={handleChange("first_name")}
                                 placeholder="Your First Name"
                                 keyboardType= "default"
-                                onBlur={() => setFieldTouched("firstName")}
-                                error={touched.firstName && errors.firstName ? errors.firstName : undefined}
+                                onBlur={() => setFieldTouched("first_name")}
+                                error={touched.first_name && errors.first_name ? errors.first_name : undefined}
                             />
                             <InputField 
                                 label={"Last Name"}
                                 inputType={"Name"}
                                 style={styles.input}
-                                value={values.lastName}
+                                value={values.last_name}
                                 icon={false}
-                                onChangeText={handleChange("lastName")}
+                                onChangeText={handleChange("last_name")}
                                 placeholder="Your Last Name"
                                 keyboardType= "default"
-                                onBlur={() => setFieldTouched("lastName")}
-                                error={touched.lastName && errors.lastName ? errors.lastName : undefined}
+                                onBlur={() => setFieldTouched("last_name")}
+                                error={touched.last_name && errors.last_name ? errors.last_name : undefined}
                             />
                             <InputField 
                                 label={"Email"}
@@ -126,7 +163,7 @@ const SignUpScreen = () => {
                             />
                             <FacebookButton 
                                 text='Sign up with Facebook'
-                                onPress={()=> console.log("facebook sign up")}
+                                onPress={()=> facebookRegister.mutate()}
                                 style={styles.signupButtons}
                             />
                             <AppleButton 
