@@ -9,6 +9,7 @@ import { ImageCarousel } from '../components/ImageCarousel';
 import PropertyHeaderSection from '../components/propertyDetailsSection/PropertyHeaderSection';
 import OrDivider from '@/components/OrDivider';
 import PricingAndFloorPlanSection from '@/components/propertyDetailsSection/PricingAndFloorPlanSection';
+import AboutSection from '@/components/propertyDetailsSection/AboutSection';
 
 type PropertyDetailScreenParams = {
     key: string,
@@ -34,6 +35,9 @@ const PropertyDetailScreen = () => {
           <PropertyHeaderSection property={item}/>
           <OrDivider style={styles.divider}/>
           <PricingAndFloorPlanSection property={item} />
+          <OrDivider style={styles.divider}/>
+          <AboutSection property={item} />
+          <OrDivider style={styles.divider}/>
         </View> 
        </>
        }

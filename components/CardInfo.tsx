@@ -17,7 +17,7 @@ export const CardInfo = (
         <Text style={styles.rent}>${property.rentLow.toLocaleString()} - {property.rentHigh.toLocaleString()} </Text>
         <MaterialCommunityIcons name='heart-outline' size={24} color={Colors[colorScheme ?? 'dark'].tint}/>
         </Row>
-        <Text style={styles.others} >{property.bedroomLow} - {property.bedroomHigh} Beds </Text>
+        <Text style={styles.others} >{property.bedroomLow === 0 ? "Studio" : property.bedroomLow} - {property.bedroomHigh} Beds </Text>
         <Text style={[styles.others, {marginTop: 5}]}>{property.name}</Text>
         <Text style={styles.others}>{property.city}, {property.state} {property.zip}</Text>
         <Text style={styles.tags}>
