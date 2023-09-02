@@ -23,18 +23,6 @@ export type Property = {
     pets: Pets[];
     phoneNumber: string;
     website: string;
-    dogsAllowed: boolean;
-    dogLimit: number;
-    dogDetails: string;
-    dogNeutered: boolean;
-    dogDeclawed: boolean;
-    dogInterview?: boolean;
-    catsAllowed: boolean;
-    catLimit: number;
-    catDetails: string;
-    catNeutered: boolean;
-    catDeclawed: boolean;
-    catInterview?: boolean;
     stars: number;
     reviews: Review[];
     features: string[];

@@ -360,6 +360,7 @@ export const properties: Property[] = [
         allowed: true,
         details: "Some breed restrictions",
         limit: 2,
+        declawed: true,
         fee: 25,
         deposit: 100,
         rent: 50,

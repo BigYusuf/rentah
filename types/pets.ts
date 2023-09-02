@@ -1,11 +1,14 @@
 
 
 export type Pets = {
-    type: string,
+    type: string | "Dog" | "Cat",
     allowed: boolean,
+    declawed?: boolean,
+    neutered?: boolean,
+    interview?: boolean,
     details: string,
     limit: number,
-    fee: number,
-    deposit: number,
-    rent: number,
+    fee?: number,
+    deposit?: number,
+    rent?: number,
   }

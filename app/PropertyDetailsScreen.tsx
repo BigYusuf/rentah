@@ -12,6 +12,7 @@ import PricingAndFloorPlanSection from '@/components/propertyDetailsSection/Pric
 import AboutSection from '@/components/propertyDetailsSection/AboutSection';
 import ContactSection from '@/components/propertyDetailsSection/ContactSection';
 import AmenitiesSection from '@/components/propertyDetailsSection/AmenitiesSection';
+import LeaseAndFeesSection from '@/components/propertyDetailsSection/LeaseAndFeesSection';
 
 type PropertyDetailScreenParams = {
     key: string,
@@ -43,6 +44,8 @@ const PropertyDetailScreen = () => {
           <ContactSection property={item} />
           <OrDivider style={styles.divider}/>
           <AmenitiesSection property={item} />
+          <OrDivider style={styles.divider}/>
+          <LeaseAndFeesSection property={item} />
           <OrDivider style={styles.divider}/>
         </View> 
        </>
