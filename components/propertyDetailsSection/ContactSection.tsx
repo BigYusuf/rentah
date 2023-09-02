@@ -27,6 +27,7 @@ const ContactSection = ({property}: {property: Property}) => {
         }
         return "Give Us A Call"
     }
+    
   return (
     <>
         <Text style={[styles.defaultMarginVertical, styles.header]}>Contact</Text>
@@ -59,14 +60,20 @@ const ContactSection = ({property}: {property: Property}) => {
                 textStyle={[styles.buttonText, { color: Colors[colorScheme ?? 'light'].tint}]}
                 title='Tour'
                 style={[styles.button, { backgroundColor: Colors[colorScheme ?? 'light'].white, borderColor: Colors[colorScheme ?? 'light'].deepColorTint, borderTopLeftRadius: 5, borderBottomLeftRadius: 5}]}
-                onPress={() => {}}
+                onPress={() =>  navigation.navigate('MessageScreen', 
+                { property_id: property.id,
+                    tour: true
+                },
+            )}
             />
             <AllButtons 
                 textStyle={[styles.buttonText, { color: Colors[colorScheme ?? 'light'].tint}]}
                 title='Message'
                 style={[styles.button, { backgroundColor: Colors[colorScheme ?? 'light'].white, borderColor: Colors[colorScheme ?? 'light'].deepColorTint, borderTopLeftRadius: 5, borderBottomLeftRadius: 5}]}
-                onPress={() => {}}
- 
+                onPress={() =>  navigation.navigate('MessageScreen', 
+                { property_id: property.id
+                },
+            )}
             />
         </Row>
     </>

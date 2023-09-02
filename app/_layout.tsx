@@ -70,13 +70,13 @@ function RootLayoutNav() {
         <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
           <Stack>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
             <Stack.Screen name="FindLocationScreen" options={{ headerShown: false, presentation: 'modal' }} />
             <Stack.Screen name="SignInScreen" options={{ headerShown: false, presentation: 'modal' }} />
             <Stack.Screen name="ForgotPasswordScreen" options={{ headerShown: false, presentation: 'modal' }} />
             <Stack.Screen name="SignUpScreen" options={{ headerShown: false, presentation: 'modal' }} />
             <Stack.Screen name="ResetPasswordScreen" options={{ headerShown: false, presentation: 'modal' }} />
             <Stack.Screen name="PropertyDetailsScreen" options={{ headerShown: false, presentation: 'modal' }} />
+            <Stack.Screen name="MessageScreen" options={{ headerShown: false, presentation: 'modal' }} />
           </Stack>
         </ThemeProvider>
       </QueryClientProvider>

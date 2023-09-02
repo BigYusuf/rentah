@@ -1,15 +1,19 @@
-import { StyleSheet, TouchableOpacity , useColorScheme } from 'react-native';
+import { StyleSheet, useColorScheme } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+
 import { Text, View } from './Themed';
 import React from 'react'
 import { Row } from './Row'
 import Colors from '../constants/Colors';
 import { Property } from '../types/property';
-import { MaterialCommunityIcons } from '@expo/vector-icons'
 import AllButtons from './AllButtons';
+import { callPhoneNumber } from '@/utils/callPhoneNumber';
 
 export const CardInfo = (
     {property}:
     {property: Property}) => {
+        const navigation = useNavigation();
         const colorScheme = useColorScheme();
   return (
     <View style={styles.cardInfo}>
@@ -28,13 +32,13 @@ export const CardInfo = (
             style={[styles.button, { borderWidth:1, borderColor: Colors[colorScheme ?? 'dark'].specialText }]} 
             textStyle={[styles.buttonText, { color: Colors[colorScheme ?? 'light'].specialText }]}
             title="Email"
-            onPress={()=> {}}
+            onPress={() => navigation.navigate('MessageScreen', {property_id: property.id})}           
        />
        < AllButtons 
             style={[styles.button, { backgroundColor: Colors[colorScheme ?? 'light'].tint }]} 
             textStyle={[styles.buttonText, { color: Colors[colorScheme ?? 'light'].white }]}
             title="Call"
-            onPress={()=> {}}
+            onPress={()=> callPhoneNumber(property.phoneNumber)}
        />
         </Row>
     </View>

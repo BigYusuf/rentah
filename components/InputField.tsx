@@ -10,6 +10,7 @@ export default function InputField({
     error,
     passwordHidden,
     icon,
+    multiline,
     placeholder,
     style,
     inputType,
@@ -23,6 +24,7 @@ export default function InputField({
     error?: string;
     passwordHidden?: boolean;
     icon: boolean;
+    multiline?: boolean;
     placeholder: string;
     style?: TextStyle;
     inputType: string;
@@ -49,8 +51,8 @@ export default function InputField({
                     <TextInput
                         keyboardType={keyboardType}  
                         placeholder={placeholder}
-                        placeholderTextColor={ Colors[colorScheme ?? 'light'].text }
-                        style={[style, styles.input, { color: Colors[colorScheme ?? 'light'].text, borderColor: Colors[colorScheme ?? 'light'].gray}]}
+                        placeholderTextColor={ Colors[colorScheme ?? 'light'].gray }
+                        style={[style, styles.input, { height:multiline ? 120 : 50, color: Colors[colorScheme ?? 'light'].text, borderColor: Colors[colorScheme ?? 'light'].gray}]}
                         autoComplete='password'
                         autoCapitalize='none'
                         secureTextEntry={passwordHidden}
@@ -75,9 +77,9 @@ export default function InputField({
                 <View style={styles.inputField}>
                     <TextInput
                         placeholder={placeholder}
-                        placeholderTextColor={ Colors[colorScheme ?? 'light'].text }
+                        placeholderTextColor={ Colors[colorScheme ?? 'light'].gray }
                         keyboardType={keyboardType}
-                        style={[style, styles.input, { color: Colors[colorScheme ?? 'light'].text, borderColor: Colors[colorScheme ?? 'light'].gray }]}
+                        style={[style, styles.input, { height:multiline ? 120 : 50, color: Colors[colorScheme ?? 'light'].text, borderColor: Colors[colorScheme ?? 'light'].gray }]}
                         value= {value}
                         onBlur={onBlur}
                         autoComplete={"email"}
@@ -94,10 +96,11 @@ export default function InputField({
         <View style={styles.inputField}>
             <TextInput
                 placeholder={placeholder}
-                placeholderTextColor={ Colors[colorScheme ?? 'light'].text }
+                placeholderTextColor={ Colors[colorScheme ?? 'light'].gray }
                 keyboardType={keyboardType}
-                style={[style, styles.input, { color: Colors[colorScheme ?? 'light'].text, borderColor: Colors[colorScheme ?? 'light'].gray }]}
+                style={[style, styles.input, { height:multiline ? 120 : 50, color: Colors[colorScheme ?? 'light'].text, borderColor: Colors[colorScheme ?? 'light'].gray }]}
                 value= {value}
+                multiline={multiline}
                 onBlur={onBlur}
                 autoComplete='name'
                 autoCapitalize="none"
@@ -126,7 +129,6 @@ const styles = StyleSheet.create({
     input:{
         borderWidth: 1, 
         borderRadius: 10, 
-        height: 50, 
         paddingLeft: 10,
         width: "100%",
     },
