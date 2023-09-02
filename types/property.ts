@@ -24,7 +24,8 @@ export type Property = {
     phoneNumber: string;
     website: string;
     stars: number;
-    reviews: Review[];
-    features: string[];
-    apartments: Apartment[];
+    reviews?: Review[];
+    features?: string[];
+    apartments?: Apartment[];
+    scores?: Scores[];
 }

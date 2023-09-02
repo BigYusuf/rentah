@@ -1,6 +1,6 @@
 
 export type Scores = {
-    type: string,
+    type: string | "Walk" | "Bike" | "Transit",
     description: string,
     score: number,
   }

@@ -1,14 +1,14 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { Marker } from 'react-native-maps'
 import React from 'react'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
-export const MapMaker = ({
+export const MapMarker = ({
     lat, long, onPress, color
 }:{
     lat: number;
     long: number;
-    onPress: () => void;
+    onPress?: () => void;
     color: string;
 }) => {
   return (

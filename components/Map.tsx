@@ -6,7 +6,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { Text, View } from './Themed';
 import { Property } from '../types/property';
-import { MapMaker } from './MapMaker';
+import { MapMarker } from './MapMarker';
 import Colors from '../constants/Colors';
 import { Card } from './Card';
 import { getPropertiesInArea } from '../assets/data/properties';
@@ -109,7 +109,7 @@ export const Map = ({
             }}//isGesture on works when provider is google
             >
             {properties.map((i, index) => (
-                <MapMaker
+                <MapMarker
                     key={index}
                     lat={i.lat}
                     long={i.long}
