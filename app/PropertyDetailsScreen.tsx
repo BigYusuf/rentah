@@ -4,7 +4,7 @@ import { useRoute } from '@react-navigation/native';
 
 import { Screen } from '../components/Screen';
 import { properties } from '../assets/data/properties';
-import { Text, View } from '../components/Themed';
+import { View } from '../components/Themed';
 import { ImageCarousel } from '../components/ImageCarousel';
 import PropertyHeaderSection from '../components/propertyDetailsSection/PropertyHeaderSection';
 import OrDivider from '@/components/OrDivider';
@@ -14,6 +14,7 @@ import ContactSection from '@/components/propertyDetailsSection/ContactSection';
 import AmenitiesSection from '@/components/propertyDetailsSection/AmenitiesSection';
 import LeaseAndFeesSection from '@/components/propertyDetailsSection/LeaseAndFeesSection';
 import LocationSection from '@/components/propertyDetailsSection/LocationSection';
+import ReviewSection from '@/components/propertyDetailsSection/ReviewSection';
 
 type PropertyDetailScreenParams = {
     key: string,
@@ -49,6 +50,8 @@ const PropertyDetailScreen = () => {
           <LeaseAndFeesSection property={item} />
           <OrDivider style={styles.divider}/>
           <LocationSection property={item} />
+          <OrDivider style={styles.divider}/>
+          <ReviewSection property={item} />
           <OrDivider style={styles.divider}/>
         </View> 
        </>
