@@ -23,7 +23,19 @@ export const loginUser = async( email: string, password: string ) => {
             email, password
         })
         if (data) return data
-        return console.log(data);
+        return null;
+    } catch (error) {
+        handleError(error)
+    }
+}
+export const forgotPassword = async( email: string ) => {
+    
+    try {
+        const {data} = await axios.put(endpoints.forgotPassword, {
+            email
+        })
+        if (data) return data
+        return null;
     } catch (error) {
         handleError(error)
     }

@@ -3,18 +3,31 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import React, { useState } from 'react'
 import * as yup from 'yup'
 import { Formik } from 'formik'
+import { useMutation } from 'react-query'
 
 import Colors from '../constants/Colors';
 import { Text, View } from '../components/Themed'
 import { Screen } from '../components/Screen'
 import { ModalHeader } from '../components/ModalHeader'
 import InputField from '../components/InputField'
+import { forgotPassword } from '@/services/user'
+import { Loading } from '@/components/Loading'
 
 const ForgotPasswordScreen = () => {  
     const colorScheme = useColorScheme();
     const [emailSent, setEmailSent] = useState<boolean>(false)
 
-   
+    const nativeForgotPass = useMutation(
+      async (values: { email: string; })=> {
+          const data = await forgotPassword(values.email);
+          if(data){
+              setEmailSent(true);
+          }
+      } 
+  );
+
+  if(nativeForgotPass.isLoading) return <Loading />
+
 
   return (
     <KeyboardAwareScrollView bounces={false} >
@@ -37,8 +50,7 @@ const ForgotPasswordScreen = () => {
                 email: yup.string().email().required("Your email is required"),
               })}
             onSubmit={(values) => {
-              console.log("submit to server", values)
-              setEmailSent(true);
+              nativeForgotPass.mutate(values)
             }}>
             {({
               values,

@@ -24,4 +24,5 @@ export const endpoints = {
   search: locationEndpoint + "/search",
   login: userEndpoint + "/login",
   register: userEndpoint + "/register",
+  forgotPassword: userEndpoint + "/forgot-password",
 }
